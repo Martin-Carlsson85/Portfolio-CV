@@ -1,0 +1,34 @@
+'use strict';
+
+const modal = document.querySelector(`.modal`);
+const overlay = document.querySelector(`.overlay`);
+const btnCloseModal = document.querySelector(`.close-modal`);
+const btnOpenModal = document.querySelectorAll(`.show-modal`);
+
+const openModel = function () {
+  modal.classList.remove(`hidden`);
+  overlay.classList.remove(`hidden`); //The dark (blured) part beside  modal
+};
+
+const closeModal = function () {
+  modal.classList.add(`hidden`);
+  overlay.classList.add(`hidden`);
+};
+
+for (let i = 0; i < btnOpenModal.length; i++)
+  btnOpenModal[i].addEventListener(`click`, openModel);
+
+btnCloseModal.addEventListener(`click`, closeModal);
+overlay.addEventListener(`click`, closeModal);
+
+//Global events
+document.addEventListener(`keydown`, function (e) {
+  //e = event object som ett argument. Vi kallar inte på funktionen, vi bara definerar den
+  //Keypropertie sätts till den tangent man trycker på
+  console.log(`A key was pressed`);
+  console.log(e.key);
+
+  if (e.key === `Escape` && !modal.classList.contains(`hidden`)) {
+    closeModal();
+  }
+});
